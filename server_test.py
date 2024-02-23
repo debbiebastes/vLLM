@@ -8,7 +8,7 @@ client = OpenAI(
     base_url=openai_api_base,
 )
 
-def call_ai(prompt, model="/home/debbie/Dev/vllm_test/LLMs/Mistral-7B-Instruct-v0.2-AWQ/"):
+def call_ai(prompt, model="/mnt/Data/Vbox_SF/AWQ/Mistral-7B-Instruct-v0.2-AWQ/"):
     messages = [{"role": "user", "content": prompt}]
     temperature = 0.6 # this is the degree of randomness of the model's output
     max_tokens = 1024
@@ -37,20 +37,11 @@ response = call_ai(prompt)
 print('Response:\n%s ' %response['body'])
 print('\nContext:\n%s ' %response['context'])
 
-# chat_response = client.chat.completions.create(
-#     model="/home/debbie/Dev/vllm_test/LLMs/Llama-2-7B-chat-AWQ",
-#     messages=[
-#         {"role": "system", "content": "You are a helpful assistant."},
-#         {"role": "user", "content": "Give me a summarized history about the founding of the USA."},
-#     ]
-# )
-# print("Chat response:", chat_response)
-
 
 #### Server invokes:
 
 #Mistral:
-# python -m vllm.entrypoints.openai.api_server --model /home/debbie/Dev/vllm_test/LLMs/Mistral-7B-Instruct-v0.2-AWQ/ --max-model-len 8192 --enforce-eager
+# python -m vllm.entrypoints.openai.api_server --model /mnt/Data/Vbox_SF/AWQ/Mistral-7B-Instruct-v0.2-AWQ/ --max-model-len 8192 --enforce-eager
 
 #Llama 2 7B:
 # python -m vllm.entrypoints.openai.api_server --model /home/debbie/Dev/vllm_test/LLMs/Llama-2-7B-chat-AWQ/
