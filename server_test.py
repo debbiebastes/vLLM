@@ -8,7 +8,7 @@ client = OpenAI(
     base_url=openai_api_base,
 )
 
-def call_ai(prompt, model="/mnt/Data/Vbox_SF/AWQ/Mistral-7B-Instruct-v0.2-AWQ/"):
+def call_ai(prompt, model="/mnt/Dragon/Vbox_SF/HuggingFaceLocal//gemma-2b-it/"):
     messages = [{"role": "user", "content": prompt}]
     temperature = 0.6 # this is the degree of randomness of the model's output
     max_tokens = 1024
@@ -41,10 +41,13 @@ print('\nContext:\n%s ' %response['context'])
 #### Server invokes:
 
 #Mistral:
-# python -m vllm.entrypoints.openai.api_server --model /mnt/Data/Vbox_SF/AWQ/Mistral-7B-Instruct-v0.2-AWQ/ --max-model-len 8192 --enforce-eager
+# python -m vllm.entrypoints.openai.api_server --model $HF_LOCAL_MODEL_PATH/hf/AWQ/Mistral-7B-Instruct-v0.2-AWQ/ --max-model-len 8192 --enforce-eager
+
+#Gemma:
+# python -m vllm.entrypoints.openai.api_server --model $HF_LOCAL_MODEL_PATH/hf/gemma-2b-it/
 
 #Llama 2 7B:
-# python -m vllm.entrypoints.openai.api_server --model /home/debbie/Dev/vllm_test/LLMs/Llama-2-7B-chat-AWQ/
+# python -m vllm.entrypoints.openai.api_server --model $HF_LOCAL_MODEL_PATH/hf/AWQ/llama-2-7b-chat-awq/
 
 #Llama 2 13B:
-# python -m vllm.entrypoints.openai.api_server --model /home/debbie/Dev/vllm_test/LLMs/Llama-2-13B-chat-AWQ/
+# python -m vllm.entrypoints.openai.api_server --model $HF_LOCAL_MODEL_PATH/hf/AWQ/llama-2-13b-chat-awq/ --enforce-eager
